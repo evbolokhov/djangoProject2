@@ -22,7 +22,7 @@ class TodoAuthorSerializer(serializers.ModelSerializer):
 class TodosSerializer(serializers.ModelSerializer):
     """ Задачки """
     # Меняем вывод, вместо `ID` пользователя будет `Имя`
-    author = serializers.SlugRelatedField(slug_field='username', read_only=True)
+    author = serializers.SlugRelatedField(slug_field='username')
 
     class Meta:
         model = TodoTasks
@@ -41,7 +41,7 @@ class TodosSerializer(serializers.ModelSerializer):
 class TodoDetailsSerializer(serializers.ModelSerializer):
     """ Одна задача """
 
-    author = TodoAuthorSerializer(read_only=True)
+    author = TodoAuthorSerializer
 
     class Meta:
         model = TodoTasks
@@ -60,12 +60,11 @@ class TodoDetailsSerializer(serializers.ModelSerializer):
 class TodoEditorSerializer(serializers.ModelSerializer):
     """ Добавление или изменение задачи """
 
-    author = TodoAuthorSerializer(read_only=True)
+    author = TodoAuthorSerializer
 
     class Meta:
         model = TodoTasks
         fields = "__all__"
-        read_only_fields = ['created_at', 'author', ]  # Только для чтения
 
 
 class TodosAllSerializer(serializers.ModelSerializer):

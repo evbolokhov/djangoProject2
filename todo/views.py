@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from .settings_local import SERVER_VERSION
+from todoprj.settings_local import SERVER_VERSION
 
 
 class AboutView(TemplateView):
